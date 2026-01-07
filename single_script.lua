@@ -8,19 +8,15 @@ local ok,data=pcall(function()
     return H:GetAsync(WL_URL)
 end)
 
-if not ok then
-    S:SetCore("SendNotification",{Title="Error",Text="Whitelist fetch failed",Duration=5})
-    return
-end
+if not ok then return end
 
 local wl=H:JSONDecode(data)
 if not wl or not wl.users then return end
 
 for _,id in ipairs(wl.users) do
     if tonumber(id)==P.UserId then
-        S:SetCore("SendNotification",{Title="Success",Text="Whitelisted",Duration=5})
         return
     end
 end
 
-S:SetCore("SendNotification",{Title="Denied",Text="Not whitelisted",Duration=5})
+return

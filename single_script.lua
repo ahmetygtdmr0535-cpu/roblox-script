@@ -1,14 +1,17 @@
 local P=game:GetService("Players").LocalPlayer
+local H=game:GetService("HttpService")
 
-local WL_URL="https://raw.githubusercontent.com/ahmetygtdmr0535-cpu/roblox-script/main/whitelist.json"
+local req = request or http_request or (syn and syn.request)
+if not req then return end
 
-local ok,data=pcall(function()
-    return game:HttpGet(WL_URL)
-end)
+local r = req({
+    Url = "https://raw.githubusercontent.com/ahmetygtdmr0535-cpu/roblox-script/main/whitelist.json",
+    Method = "GET"
+})
 
-if not ok then return end
+if not r or not r.Body then return end
 
-local wl=game:GetService("HttpService"):JSONDecode(data)
+local wl = H:JSONDecode(r.Body)
 if not wl or not wl.users then return end
 
 for _,id in ipairs(wl.users) do

@@ -1,7 +1,7 @@
 local H=game:GetService("HttpService")
 local P=game:GetService("Players").LocalPlayer
 local S=game:GetService("StarterGui")
-local U="https://raw.githubusercontent.com/yatassa/roblox-script/main/whitelist.json"
+local U="https://raw.githubusercontent.com/ahmetygtdmr0535-cpu/roblox-script/main/whitelist.json"
 local O,D=pcall(function()return H:GetAsync(U)end)
 if not O then return end
 local W=H:JSONDecode(D)

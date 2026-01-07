@@ -1,16 +1,14 @@
-local H=game:GetService("HttpService")
 local P=game:GetService("Players").LocalPlayer
-local S=game:GetService("StarterGui")
 
 local WL_URL="https://raw.githubusercontent.com/ahmetygtdmr0535-cpu/roblox-script/main/whitelist.json"
 
 local ok,data=pcall(function()
-    return H:GetAsync(WL_URL)
+    return game:HttpGet(WL_URL)
 end)
 
 if not ok then return end
 
-local wl=H:JSONDecode(data)
+local wl=game:GetService("HttpService"):JSONDecode(data)
 if not wl or not wl.users then return end
 
 for _,id in ipairs(wl.users) do
